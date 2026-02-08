@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>LinkedIn Review | HireHelper</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<style>
+body {
+    margin: 0;
+    font-family: "Segoe UI", Arial, sans-serif;
+    background: var(--bg, #fff);
+    color: var(--text, #111);
+    padding: 2rem;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.logo { font-weight: 700; font-size: 1.3rem; }
+
+.container { max-width: 900px; margin: auto; }
+
+.connect-box {
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    padding: 1.5rem;
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+button {
+    background: #0078d7;
+    color: white;
+    border: none;
+    padding: 0.8rem 1.2rem;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+button:hover { background: #005fa3; }
+
+.tips { display: none; display: grid; gap: 1.25rem; }
+
+.tip-card {
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    padding: 1.25rem;
+    background: #f8f8f8;
+}
+
+.tip-card h3 { margin-top: 0; }
+
+.back-btn {
+    background: transparent;
+    color: #0078d7;
+    border: 1px solid #0078d7;
+    padding: 0.5rem 0.9rem;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    cursor: pointer;
+}
+
+.back-btn:hover { background: #0078d7; color: white; }
+
+input[type="file"] { margin-top: 1rem; cursor: pointer; }
+</style>
+</head>
+
+<body>
+<header>
+    <div class="logo">HireHelper</div>
+    <button id="backToDashboard" class="back-btn">← Back to Dashboard</button>
+</header>
+
+<main class="container">
+    <section class="connect-box" id="connectBox">
+        <h2>Upload Your LinkedIn PDF</h2>
+        <p>
+            Download your LinkedIn profile PDF (three dots → Save to PDF) and upload it here.
+        </p>
+        <input type="file" id="linkedinFile" accept=".pdf" />
+        <button id="uploadLinkedIn">Analyze Profile</button>
+    </section>
+
+    <section class="tips" id="tipsSection">
+        <div class="tip-card"><h3>Profile Headline</h3><p id="headlineTip"></p></div>
+        <div class="tip-card"><h3>About Section</h3><p id="aboutTip"></p></div>
+        <div class="tip-card"><h3>Work Experience & Credibility</h3><p id="experienceTip"></p></div>
+        <div class="tip-card"><h3>Connection Strategy</h3><p id="connectionTip"></p></div>
+        <div class="tip-card"><h3>Visual Aesthetics</h3><p id="visualTip"></p></div>
+    </section>
+</main>
+
+<script src="js/linkedin.js"></script>
+</body>
+</html>

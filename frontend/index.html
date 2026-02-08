@@ -1,8 +1,209 @@
-<!--
-Welcome Page
-* Logo, company name
-* slogan
-* get started button
-* what are your career / job goals (enter any field or company you might want to work at)?
-* input resume
--->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>HireHelper</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    :root {
+      --bg-color: #ffffff;
+      --text-color: #111111;
+      --accent-color: #0078d7;
+      --border-color: #cccccc;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg-color: #121212;
+        --text-color: #f5f5f5;
+        --accent-color: #3399ff;
+        --border-color: #333333;
+      }
+    }
+
+    body {
+      font-family: "Segoe UI", Arial, sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      margin: 0;
+      padding: 2em;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    img.logo {
+      width: 140px;
+      margin-bottom: 1rem;
+    }
+
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+    }
+
+    p.description {
+      max-width: 600px;
+      text-align: center;
+      margin-bottom: 2rem;
+      font-size: 1.1rem;
+      line-height: 1.5;
+    }
+
+    .onboarding {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      width: 100%;
+      max-width: 420px;
+      align-items: stretch;
+    }
+
+    label {
+      font-weight: 600;
+      font-size: 0.95rem;
+    }
+
+    input[type="text"],
+    input[type="file"] {
+      padding: 0.75rem;
+      border-radius: 8px;
+      border: 1px solid var(--border-color);
+      background-color: transparent;
+      color: var(--text-color);
+    }
+
+    input[type="file"] {
+      border-style: dashed;
+      cursor: pointer;
+    }
+
+    button {
+      margin-top: 1rem;
+      background-color: var(--accent-color);
+      color: white;
+      border: none;
+      padding: 0.9rem;
+      border-radius: 8px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    button:hover,
+    button:focus-visible {
+      background-color: #005fa3;
+      outline: none;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Logo -->
+  <img src="/hirehelperlogo.png" alt="HireHelper Logo" class="logo">
+
+  <!-- Title -->
+  <h1>HireHelper</h1>
+
+  <!-- Slogan -->
+  <p class="description">
+    Your Journey From Learning to Serving.
+  </p>
+
+  <!-- Onboarding -->
+  <section class="onboarding">
+
+    <!-- Career Goal -->
+    <label for="goal">
+      What are your career or job goals?
+    </label>
+    <input
+      type="text"
+      id="goal"
+      placeholder="e.g. Product Manager at PNC, Software Engineer Intern"
+      aria-label="Career or job goal"
+    >
+
+    <!-- Resume Upload -->
+    <label for="resume">
+      Upload your resume to get started
+    </label>
+    <input
+      type="file"
+      id="resume"
+      accept=".pdf,.doc,.docx"
+      aria-label="Upload resume"
+    >
+
+    <!-- Get Started -->
+    <button id="startButton">
+      Get Started
+    </button>
+
+  </section>
+
+  <script>
+    const API_BASE = "http://127.0.0.1:5000";
+
+    // Upload resume to backend (optional) and store parsed text in sessionStorage
+    async function uploadResumeIfPresent(file) {
+      if (!file) return null;
+
+      const formData = new FormData();
+      formData.append("file", file);
+
+      try {
+        const resp = await fetch(`${API_BASE}/api/resume/upload`, {
+          method: "POST",
+          body: formData
+        });
+
+        const data = await resp.json();
+
+        if (!resp.ok) {
+          const msg = data && data.error ? data.error : "Resume upload failed.";
+          throw new Error(msg);
+        }
+
+        // Store parsed resume in sessionStorage (Option A)
+        if (data.resume_text) {
+          sessionStorage.setItem("resumeText", data.resume_text);
+          sessionStorage.setItem("resumeFilename", data.filename);
+        }
+
+        return data;
+
+      } catch (err) {
+        throw err;
+      }
+    }
+
+    document.getElementById("startButton").addEventListener("click", async () => {
+      const goal = document.getElementById("goal").value.trim();
+      const resumeFile = document.getElementById("resume").files[0];
+
+      if (!goal && !resumeFile) {
+        alert("Please enter a goal or upload a resume to continue.");
+        return;
+      }
+
+      // Save goal for personalization
+      sessionStorage.setItem("careerGoal", goal);
+
+      try {
+        await uploadResumeIfPresent(resumeFile);
+
+        // Navigate to dashboard
+        window.location.href = "dashboard.html";
+
+      } catch (err) {
+        alert(err.message || "Something went wrong during resume upload.");
+      }
+    });
+  </script>
+
+</body>
+</html>

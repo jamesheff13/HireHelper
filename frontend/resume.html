@@ -1,0 +1,153 @@
+<!-- 
+* give overall score
+* Tips for header / contact info, give a score
+* Tips for Objective (if applicable), give a score
+* Tips for work experience, give a score
+* tips for Skills, give a score
+* tips for education / coursework, give a score
+* tips for structure / give a score
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Resume Review | HireHelper</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<style>
+body {
+    margin: 0;
+    font-family: "Segoe UI", Arial, sans-serif;
+    background: #fff;
+    color: #111;
+    padding: 2rem;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.logo {
+    font-weight: 700;
+    font-size: 1.3rem;
+}
+
+.container {
+    max-width: 900px;
+    margin: auto;
+}
+
+.status-box {
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    padding: 1.5rem;
+    text-align: center;
+    margin-bottom: 2rem;
+    background: #f8f8f8;
+}
+
+.tips {
+    display: none;
+    display: grid;
+    gap: 1.25rem;
+}
+
+.tip-card {
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    padding: 1.25rem;
+    background: #f8f8f8;
+}
+
+.tip-card h3 {
+    margin-top: 0;
+}
+
+.back-btn {
+    background: transparent;
+    color: #0078d7;
+    border: 1px solid #0078d7;
+    padding: 0.5rem 0.9rem;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    cursor: pointer;
+}
+
+.back-btn:hover {
+    background: #0078d7;
+    color: white;
+}
+</style>
+</head>
+
+<body>
+<header>
+    <div class="logo">HireHelper</div>
+    <button id="backToDashboard" class="back-btn">← Back to Dashboard</button>
+</header>
+
+<main class="container">
+
+    <!-- Status / Info -->
+    <section class="status-box">
+        <h2>Resume Review</h2>
+        <p>Analyzing the resume you uploaded earlier.</p>
+    </section>
+
+    <!-- Tips / Scores -->
+    <section class="tips" id="tipsSection">
+
+        <div class="tip-card">
+            <h3>Overall Resume Score</h3>
+            <p id="overallScore"></p>
+        </div>
+
+        <div class="tip-card">
+            <h3>Header / Contact Info</h3>
+            <p id="headerTip"></p>
+            <p><strong>Score:</strong> <span id="headerScore"></span>/10</p>
+        </div>
+
+        <div class="tip-card">
+            <h3>Objective / Summary</h3>
+            <p id="objectiveTip"></p>
+            <p><strong>Score:</strong> <span id="objectiveScore"></span>/10</p>
+        </div>
+
+        <div class="tip-card">
+            <h3>Work Experience</h3>
+            <p id="experienceTip"></p>
+            <p><strong>Score:</strong> <span id="experienceScore"></span>/10</p>
+        </div>
+
+        <div class="tip-card">
+            <h3>Skills</h3>
+            <p id="skillsTip"></p>
+            <p><strong>Score:</strong> <span id="skillsScore"></span>/10</p>
+        </div>
+
+        <div class="tip-card">
+            <h3>Education / Coursework</h3>
+            <p id="educationTip"></p>
+            <p><strong>Score:</strong> <span id="educationScore"></span>/10</p>
+        </div>
+
+        <div class="tip-card">
+            <h3>Structure & Formatting</h3>
+            <p id="structureTip"></p>
+            <p><strong>Score:</strong> <span id="structureScore"></span>/10</p>
+        </div>
+
+    </section>
+</main>
+
+<h2>Resume Preview (first 300 chars)</h2>
+<pre id="resumePreview"></pre>
+
+<script src="js/resume.js"></script>
+</body>
+</html>

@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mock Interview</title>
+  <style>
+    :root {
+      --bg-color: #ffffff;
+      --text-color: #111111;
+      --accent-color-start: #4CAF50;
+      --accent-color-next: #2196F3;
+      --accent-color-finish: #f44336;
+      --input-bg: #fff;
+      --input-border: #ccc;
+      --feedback-bg: #e7f3fe;
+      --feedback-border: #2196F3;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg-color: #121212;
+        --text-color: #f5f5f5;
+        --accent-color-start: #339966;
+        --accent-color-next: #3399ff;
+        --accent-color-finish: #ff6666;
+        --input-bg: #1e1e1e;
+        --input-border: #444;
+        --feedback-bg: #1e2a38;
+        --feedback-border: #3399ff;
+      }
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      margin: 40px;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+    }
+
+    h1 {
+      text-align: center;
+    }
+
+    #interview-container {
+      max-width: 600px;
+      margin: auto;
+      background: var(--input-bg);
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+
+    #question {
+      font-weight: bold;
+      margin-bottom: 10px;
+      min-height: 50px;
+    }
+
+    #answer {
+      width: 100%;
+      padding: 8px;
+      margin-bottom: 10px;
+      border-radius: 5px;
+      border: 1px solid var(--input-border);
+      background-color: var(--input-bg);
+      color: var(--text-color);
+    }
+
+    button {
+      padding: 10px 15px;
+      margin-right: 5px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      color: white;
+    }
+
+    #start-btn { background-color: var(--accent-color-start); }
+    #next-btn { background-color: var(--accent-color-next); }
+    #finish-btn { background-color: var(--accent-color-finish); }
+
+    button:hover { opacity: 0.9; }
+
+    #feedback {
+      margin-top: 20px;
+      padding: 10px;
+      background: var(--feedback-bg);
+      border-left: 6px solid var(--feedback-border);
+      border-radius: 5px;
+      white-space: pre-wrap;
+      min-height: 80px;
+    }
+
+    #role-container {
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    #role {
+      padding: 5px;
+      width: 60%;
+      border-radius: 5px;
+      border: 1px solid var(--input-border);
+      background-color: var(--input-bg);
+      color: var(--text-color);
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Mock Interview</h1>
+  <div id="interview-container">
+
+    <div id="role-container">
+      <label for="role"><strong>Role for the interview:</strong></label><br>
+      <input type="text" id="role" placeholder="Software Engineer">
+    </div>
+
+    <div id="question">Press "Start Interview" to begin.</div>
+    <input type="text" id="answer" placeholder="Type your answer here...">
+
+    <div style="margin-top: 10px;">
+      <button id="start-btn">Start Interview</button>
+      <button id="next-btn" disabled>Next Question</button>
+      <button id="finish-btn" disabled>Finish Interview</button>
+    </div>
+
+    <div id="feedback"></div>
+  </div>
+
+  <script src="/js/interview.js"></script>
+</body>
+</html>
