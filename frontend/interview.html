@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mock Interview</title>
+  <title>Mock Interview | HireHelper</title>
+
   <style>
     :root {
       --bg-color: #ffffff;
@@ -33,18 +34,49 @@
 
     body {
       font-family: Arial, sans-serif;
-      margin: 40px;
+      margin: 0;
       background-color: var(--bg-color);
       color: var(--text-color);
     }
 
+    /* ─────────── Header ─────────── */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.25rem 2rem;
+      border-bottom: 1px solid var(--input-border);
+    }
+
+    .logo {
+      font-weight: 700;
+      font-size: 1.3rem;
+    }
+
+    .back-btn {
+      background: transparent;
+      color: var(--accent-color-next);
+      border: 1px solid var(--accent-color-next);
+      padding: 0.5rem 0.9rem;
+      border-radius: 8px;
+      font-size: 0.95rem;
+      cursor: pointer;
+    }
+
+    .back-btn:hover {
+      background: var(--accent-color-next);
+      color: white;
+    }
+
+    /* ─────────── Interview Layout ─────────── */
     h1 {
       text-align: center;
+      margin-top: 2rem;
     }
 
     #interview-container {
       max-width: 600px;
-      margin: auto;
+      margin: 2rem auto;
       background: var(--input-bg);
       padding: 20px;
       border-radius: 10px;
@@ -107,9 +139,19 @@
     }
   </style>
 </head>
+
 <body>
 
+  <!-- Header -->
+  <header>
+    <div class="logo">HireHelper</div>
+    <button class="back-btn" onclick="window.location.href='dashboard.html'">
+      ← Back to Dashboard
+    </button>
+  </header>
+
   <h1>Mock Interview</h1>
+
   <div id="interview-container">
 
     <div id="role-container">
