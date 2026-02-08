@@ -15,6 +15,9 @@
   <title>HireHelper Dashboard</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
+  <!-- Charts -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
   <style>
     :root {
       --bg: #ffffff;
@@ -86,8 +89,8 @@
       flex: 1;
       display: grid;
       grid-template-columns: 1.2fr 1fr;
-      gap: 1.5rem;
-      padding: 1.5rem;
+      gap: 1.25rem;
+      padding: 1.25rem;
     }
 
     /* Left Panel (AI / Text Area) */
@@ -142,8 +145,9 @@
     /* Right Panel (Charts / Metrics) */
     .metrics {
       display: grid;
-      grid-template-rows: repeat(3, 1fr);
-      gap: 1rem;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.75rem;
+      align-content: start;
     }
 
     .card {
@@ -158,18 +162,43 @@
       font-size: 1rem;
     }
 
-    .chart-placeholder {
-      height: 100%;
-      border: 2px dashed var(--border);
-      border-radius: 8px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 0.9rem;
-      opacity: 0.7;
+    .metric {
+      font-size: 1.6rem;
+      font-weight: 600;
+      color: var(--accent);
     }
 
-    /* Responsive */
+    .subtext {
+      font-size: 0.75rem;
+      opacity: 0.75;
+    }
+
+    canvas {
+      max-height: 120px;
+    }
+
+    .full {
+      grid-column: span 2;
+    }
+
+    ul {
+      margin: 0.4rem 0 0;
+      padding-left: 1.1rem;
+      line-height: 1.4;
+    }
+
+    .signal-btn {
+      margin-top: 0.6rem;
+      width: 100%;
+      padding: 0.5rem;
+      border-radius: 8px;
+      border: none;
+      background: var(--accent);
+      color: white;
+      cursor: pointer;
+      font-size: 0.85rem;
+    }
+
     @media (max-width: 900px) {
       main {
         grid-template-columns: 1fr;
@@ -189,7 +218,6 @@
         <li><a href="interview.html">Mock Interview</a></li>
         <li><a href="resume.html">Resume Review</a></li>
         <li><a href="linkedin.html">LinkedIn</a></li>
-
       </ul>
     </nav>
   </header>
@@ -197,7 +225,7 @@
   <!-- Main Content -->
   <main>
 
-    <!-- Left: AI Wrapper -->
+    <!-- LEFT: CAREER COACH -->
     <section class="ai-panel">
       <h2>Your Career Coach</h2>
 
@@ -205,7 +233,7 @@
         <p><strong>Welcome!</strong></p>
         <p>
           Based on your goal, I’ll help with interview prep, resume tips,
-          and targeted advice.
+          and targeted advice. I'll make sure you're trained to succeed!
         </p>
       </div>
 
@@ -215,31 +243,85 @@
       </div>
     </section>
 
-    <!-- Right: Charts / Data -->
+    <!-- RIGHT: METRICS -->
     <section class="metrics">
+
       <div class="card">
         <h3>Resume Strength</h3>
-        <div class="chart-placeholder">
-          Chart goes here
-        </div>
+        <div class="metric">90%</div>
+        <div class="subtext">Aligned with target roles</div>
+      </div>
+
+      <div class="card">
+        <h3>Overall Candidate Readiness</h3>
+        <div class="metric">78%</div>
+        <div class="subtext">Approaching job-ready</div>
       </div>
 
       <div class="card">
         <h3>Interview Readiness</h3>
-        <div class="chart-placeholder">
-          Chart goes here
-        </div>
+        <canvas id="interviewChart"></canvas>
       </div>
 
       <div class="card">
         <h3>Skill Coverage</h3>
-        <div class="chart-placeholder">
-          Chart goes here
-        </div>
+        <canvas id="skillsChart"></canvas>
       </div>
+
+      <div class="card full">
+        <h3>Progress & Next Steps</h3>
+        <div class="subtext">
+          9 days active · 4 mock interviews · 3 resume iterations
+        </div>
+        <ul>
+          <li>Practice technical explanations</li>
+          <li>Refine behavioral STAR responses</li>
+          <li>Target role-specific mock interviews</li>
+        </ul>
+        <button class="signal-btn">
+          Signal Readiness to Companies
+        </button>
+      </div>
+
     </section>
 
   </main>
+
+  <!-- Charts -->
+  <script>
+    new Chart(document.getElementById("interviewChart"), {
+      type: "doughnut",
+      data: {
+        labels: ["Ready", "Needs Improvement"],
+        datasets: [{
+          data: [65, 35],
+          backgroundColor: ["#3399ff", "#555"],
+          borderWidth: 0
+        }]
+      },
+      options: {
+        cutout: "70%",
+        plugins: { legend: { display: false } }
+      }
+    });
+
+    new Chart(document.getElementById("skillsChart"), {
+      type: "bar",
+      data: {
+        labels: ["Technical", "Behavioral", "Communication"],
+        datasets: [{
+          data: [72, 80, 76],
+          backgroundColor: "#3399ff"
+        }]
+      },
+      options: {
+        scales: {
+          y: { beginAtZero: true, max: 100 }
+        },
+        plugins: { legend: { display: false } }
+      }
+    });
+  </script>
 
 </body>
 </html>
