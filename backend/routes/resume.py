@@ -1,5 +1,5 @@
 from __future__ import annotations
-from services.ai_service import analyze_resume
+from services.resume_service import analyze_resume
 
 
 import os
@@ -56,8 +56,14 @@ def upload_resume() -> Tuple[object, int]:
         parsed = parse_docx(tmp_path)
         
         #test
-        print("Parsed resume chars:", len(parsed.text))
-        print("First 300 chars:\n", parsed.text[:300])
+        print("=== DEBUG: Parsed Resume ===")
+        print("Length of parsed text:", len(parsed.text))
+        if len(parsed.text.strip()) == 0:
+            print("Warning: parsed resume text is empty!")
+        else:
+            print("Preview (first 500 chars):")
+            print(parsed.text[:500])
+            print("=============================")
 
         return jsonify(
             {

@@ -6,6 +6,11 @@ def analyze_linkedin(linkedin_text: str) -> dict:
     Takes raw LinkedIn profile text and returns structured recommendations:
     headline, about, experience, connections, visual
     """
+
+    # 🔹 TRUNCATE TEXT TO SAFE LENGTH
+    MAX_LENGTH = 4000  # characters
+    linkedin_text = linkedin_text[:MAX_LENGTH]
+    
     prompt = f"""
 You are a professional career coach analyzing a LinkedIn profile. Here is the profile text:
 
