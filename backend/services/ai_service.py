@@ -2,6 +2,7 @@
 
 import os
 import cohere
+import time
 from dotenv import load_dotenv
 
 
@@ -16,7 +17,8 @@ def generate_question(role, history):
     prompt = f"""
 You are a professional interviewer for a {role}.
 Previously asked questions: {', '.join(q for q, _ in history) or 'None'}
-Ask ONE new interview question. Do NOT repeat previous questions. Respond ONLY with the question text.
+Ask ONE new interview question. Questions can be behavioral and/or technical. 
+Do NOT repeat previous questions. Respond ONLY with the question text.
 """
     try:
         response = co.chat(model=MODEL, message=prompt, temperature=0.8, max_tokens=80)
